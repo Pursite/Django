@@ -3,6 +3,22 @@ from django.db import models
 # Create your models here.
 
 
+class IsActiveManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).select_related("category", "brand")
+
+    def active(self, *args, **kwargs):
+        return self.get_queryset(*args, **kwargs).filter(is_active=True)
+
+    def deactive(self, *args, **kwargs):
+        return self.get_queryset(*args, **kwargs).exclude(is_active=True)
+
+
+class IsActiveCategoryManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(category__is_active=True)
+
+
 class ProductType(models.Model):
     title = models.CharField(max_length=32, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -71,18 +87,23 @@ class Product(models.Model):
     upc = models.BigIntegerField(unique=True)
     title = models.CharField(max_length=32)
     description = models.TextField(blank=True)
-    stock = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-
     is_active = models.BooleanField(default=True)
-
     category = models.ForeignKey(
         Category, on_delete=models.PROTECT, related_name="products"
     )
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name="products")
 
+    objects = IsActiveManager()
+    default_manager = models.Manager()
+    is_active_category_manager = IsActiveCategoryManager()
+
     def __str__(self):
         return self.title
+
+    @property
+    def stock(self):
+        return self.partners.all().order_by("price").first()
 
 
 class ProductAttributeValue(models.Model):

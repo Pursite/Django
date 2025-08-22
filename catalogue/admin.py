@@ -32,9 +32,9 @@ class ProductAdmin(admin.ModelAdmin):
         "brand",
     ]
     list_display_links = ["upc", "product_type"]
-    list_filter = ["is_active", "stock"]
+    list_filter = ["is_active"]
     search_fields = ["upc", "title", "category__name", "brand__name"]
-    list_editable = ["is_active", "stock"]
+    list_editable = ["is_active"]
     ordering = ["-upc"]
     inlines = [ProductAttributeValueInLine]
 
