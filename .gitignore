@@ -2,4 +2,5 @@ venv/
 .idea/
 *.pyc
 local_*.py
-*.sqlite3
+/static/
+/staticfiles/

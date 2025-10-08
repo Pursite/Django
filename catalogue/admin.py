@@ -7,6 +7,7 @@ from .models import (
     ProductType,
     ProductAttribute,
     ProductAttributeValue,
+    ProductImage,
 )
 
 
@@ -19,6 +20,9 @@ class ProductAttributeValueInLine(admin.TabularInline):
     model = ProductAttributeValue
     extra = 1
 
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
 
 @register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -36,7 +40,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ["upc", "title", "category__name", "brand__name"]
     list_editable = ["is_active"]
     ordering = ["-upc"]
-    inlines = [ProductAttributeValueInLine]
+    inlines = [ProductAttributeValueInLine, ProductImageInline]                
 
 
 @register(ProductType)

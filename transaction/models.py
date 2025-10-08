@@ -35,12 +35,17 @@ class Transaction(models.Model):
     def get_report(cls):
         """Show all users and their balances"""
         positive_transactions = Sum(
-            "transactions__amount", filter=Q(transactions__transaction_type__in=[cls.CHARGE, cls.TRANSFER_RECEIVED]),
+            "transactions__amount",
+            filter=Q(
+                transactions__transaction_type__in=[cls.CHARGE, cls.TRANSFER_RECEIVED]
+            ),
         )
 
         negative_transactions = Sum(
             "transactions__amount",
-            filter=Q(transactions__transaction_type__in=[cls.PURCHASE, cls.TRANSFER_SEND]),
+            filter=Q(
+                transactions__transaction_type__in=[cls.PURCHASE, cls.TRANSFER_SEND]
+            ),
         )
 
         return User.objects.annotate(
@@ -124,7 +129,7 @@ class TransferTransaction(models.Model):
             instanse = cls.objects.create(
                 sender_transaction=sender_transaction,
                 receiver_transaction=receiver_transaction,
-        )
+            )
 
         return instanse
 

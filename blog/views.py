@@ -14,7 +14,7 @@ def post_list(request, year=None, month=None, code=None):
     if code is not None:
         return HttpResponse(f"gift code is {code}")
 
-    return HttpResponse("post list page")
+    return HttpResponse("<h1>H1 tag</h1><br><h2>H2 tag</h2>")
 
 
 def categories_list(request, post_title):
