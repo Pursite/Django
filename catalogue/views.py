@@ -25,7 +25,8 @@ def product_detail(request, pk):
 def category_products(request, pk):
     try:
         category = Category.objects.prefetch_related("products").get(pk=pk)
-    except Category.Doesnotexsits:
+        
+    except category.Doesnotexsits:
         return HttpResponse("category does not exists")
 
 

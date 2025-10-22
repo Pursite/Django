@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.urls import path, register_converter, re_path
-from .views import *
+from .views import categories_list, post_detail, post_list
 from .utils import FourDigitYear
 
 
@@ -9,7 +9,7 @@ register_converter(FourDigitYear, "FourDigit")
 urlpatterns = [
     path("list/", post_list),
     path("detail/<uuid:post_uuid>/", post_detail),
-    path("detail/<int:post_id>/", post_detail),
+    path("detail/<int:pk>/", post_detail),
     re_path(r"detail/(?P<post_slug>[/w-])+/", post_detail),
     path("categories/list/<slug:post_title>/", categories_list),
     # path("archive/<FourDigit:year>/", post_list),

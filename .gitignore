@@ -4,3 +4,4 @@ venv/
 local_*.py
 /static/
 /staticfiles/
+.vscode

@@ -6,15 +6,14 @@ from catalogue.models import Product
 from django.http import Http404
 from basket.forms import AddToBasketFrom
 
-    # TODO: Define form fields here
-
+# TODO: Define form fields here
 
 
 @require_POST
 def add_to_pasket(request):
     response = HttpResponseRedirect(request.POST.get('next', '/'))
 
-    basket = Basket.get_basket(request.COOKIE.get('basket_id', None))
+    basket = Basket.get_basket(request.COOKIES.get('basket_id', None))
     if basket is None:
         raise Http404
     # if basket_id is None:
@@ -29,11 +28,11 @@ def add_to_pasket(request):
 
     if not basket.validate_user(request.user):
         raise Http404
-    
+
     form = AddToBasketFrom(request.POST)
     if form.is_valid():
         form.save(basket=basket)
-    
+
     # product_id = request.POST.get('product_id', None)
     # quantity = request.POST.get('quantity', 1)
     # try:

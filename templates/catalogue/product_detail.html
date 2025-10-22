@@ -9,7 +9,7 @@
     <p>{{product.description|truncatewords:10}}</p>
     <p>$ {{product.stock.price}}</p>
 
-    <form method="post" action="{% url 'add-to-basket' %}">
+    <form method="POST" action="{% url 'add-to-basket' %}">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="hidden" name="next" value="{{request.build_absolute_uri}}">
