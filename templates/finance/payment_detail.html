@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Detail</title>
+</head>
+<body>
+
+<!-- <p>title: {{payment.purchases.first}}</p> -->
+<p>payment id: {{payment.invoice_number}}</p>
+<p>payment amount: {{payment.amount}}</p>
+
+GateWays:
+    {% for gateway in gateways %}
+        <p><a href="{% url 'payment-gateway' payment.invoice_number gateway.gateway_code %}">{{gateway.title}}</a></p>
+    {% endfor %}
+
+</body>
+</html>

@@ -1,9 +1,139 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>درباره من — فروشگاه آرمین</title>
+    <style>
+        body {
+            font-family: "Vazirmatn", sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            color: #333;
+        }
 
-{% block title %} About US {% endblock %}
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
 
-{% block content %}
+        .container {
+            width: 85%;
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-<p>im armin bhdr and i love programming </p>
+        h1 {
+            color: #007bff;
+            font-size: 1.8rem;
+        }
 
-{% endblock %}
+        p {
+            line-height: 1.9;
+            font-size: 1rem;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">فروشگاه آرمین</h1>
+      <nav class="main-nav">
+        <a href="/">خانه</a>
+        <a href="/products/">محصولات</a>
+        <a href="/contact/">تماس</a>
+        <a class="active" href="/about/">درباره من</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h2>سلام — من آرمین هستم</h2>
+          <p class="lead">این فروشگاه با هدف ارائهٔ محصولات باکیفیت و تجربهٔ خرید ساده راه‌اندازی شده. من به‌عنوان بنیان‌گذار، سعی می‌کنم بهترین انتخاب‌ها را به شما معرفی کنم.</p>
+          <a class="btn" href="/products/">مشاهده محصولات</a>
+        </div>
+        <div class="hero-image" aria-hidden="true">
+          <img src="{% static 'images/me-illustration.svg' %}" alt="عکس یا نماد درباره من">
+        </div>
+      </div>
+    </section>
+
+    <section class="about container">
+      <h3>قصهٔ من</h3>
+      <p>از بچگی علاقه‌مند به فناوری و طراحی بودم. بعد از سال‌ها تجربهٔ کار با محصولات دیجیتال و فیزیکی، تصمیم گرفتم فروشگاهی راه‌اندازی کنم که تمرکز آن روی کیفیت، شفافیت و خدمات پس از فروش باشد.</p>
+
+      <div class="cards">
+        <article class="card">
+          <h4>ماموریت</h4>
+          <p>ارائهٔ محصولات با کیفیت و تجربهٔ خرید لذت‌بخش برای همه.</p>
+        </article>
+
+        <article class="card">
+          <h4>دیدگاه</h4>
+          <p>ایجاد یک مارکت قابل اعتماد که مشتریان به آن بازگردند.</p>
+        </article>
+
+        <article class="card">
+          <h4>ارزش‌ها</h4>
+          <p>صداقت، کیفیت و پاسخگویی سریع.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="stats container">
+      <div class="stat">
+        <div class="num">۵۰+</div>
+        <div class="label">محصول انتخاب‌شده</div>
+      </div>
+      <div class="stat">
+        <div class="num">۱۰۰۰+</div>
+        <div class="label">مشتری راضی</div>
+      </div>
+      <div class="stat">
+        <div class="num">۵ سال</div>
+        <div class="label">تجربهٔ کاری</div>
+      </div>
+    </section>
+
+    <section class="contact-cta container">
+      <h3>دوست داری در تماس بمونیم؟</h3>
+      <p>اگر سوالی دربارهٔ محصولات یا همکاری داری، خوشحال می‌شم پیام بدی.</p>
+      <a class="btn btn-outline" href="/contact/">تماس با من</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© ۲۰۲۵ فروشگاه آرمین — همهٔ حقوق محفوظ است.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

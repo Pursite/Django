@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from myproject.local_settings import *
 import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,13 +47,19 @@ INSTALLED_APPS = [
     "transaction.apps.TransactionConfig",
     "partner.apps.PartnerConfig",
     "basket.apps.BasketConfig",
-    "shipping.apps.ShippingConfig"
+    "shipping.apps.ShippingConfig",
+    "finance.apps.FinanceConfig",
+    "package.apps.PackageConfig",
+    "purchase.apps.PurchaseConfig",
+
+    "rosetta",
 
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -117,9 +125,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = 'fa-ir'
+LANGUAGES = (
+    ('en-us', _('English')),
+    ('fa', _('فارسی')),
+)
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),   
+)
 
-TIME_ZONE = "Asia/Tehran"
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -141,6 +156,25 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+ZARRINPAL = {
+    'merchant_id' : ZARRINPAL_MERCHANT_ID,
+    'gateway_request_url' : 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl',
+    'gateway_callback_url' : 'http://127.0.0.1:8000/finance/verify',
+    'gateway_startpay_url': 'https://sandbox.zarinpal.com/pg/StartPay/'
+
+}
+
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 
 
 LOGIN_URL = "/admin/login/"

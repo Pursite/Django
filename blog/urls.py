@@ -1,4 +1,4 @@
-from django.conf.urls import url
+
 from django.urls import path, register_converter, re_path
 from .views import categories_list, post_detail, post_list
 from .utils import FourDigitYear
