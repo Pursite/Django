@@ -6,4 +6,3 @@ urlpatterns = [
     path("list/", PurchaseListView.as_view(), name="list-purchase")
 ]
 
-

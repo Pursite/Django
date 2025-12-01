@@ -1,4 +1,3 @@
-from faulthandler import is_enabled
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.conf import settings
